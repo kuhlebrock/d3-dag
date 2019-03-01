@@ -70,11 +70,13 @@ export function solve(Q, c, A, b, meq = 0) {
 }
 
 // Assign nodes x in [0, 1] based on solution
-export function layout(layers, inds, solution) {
+export function layout(layers, inds, solution, normalize) {
   // Rescale to be in [0, 1]
   const min = Math.min(...solution);
   const span = Math.max(...solution) - min;
   layers.forEach((layer) =>
-    layer.forEach((n) => (n.x = (solution[inds[n.id]] - min) / span)),
+    layer.forEach((n) => (n.x = normalize ? 
+      (solution[inds[n.id]] - min) / span 
+      : (solution[inds[n.id]] - min)))
   );
 }

@@ -12,7 +12,7 @@ function checkWeight(weight) {
 export default function() {
   let weight = 0.5;
 
-  function coordMinCurve(layers, separation) {
+  function coordMinCurve(layers, separation, normalized) {
     const inds = indices(layers);
     const n = Object.keys(inds).length;
     const [A, b] = sep(layers, inds, separation);
@@ -43,7 +43,7 @@ export default function() {
     );
 
     const solution = solve(Q, c, A, b);
-    layout(layers, inds, solution);
+    layout(layers, inds, solution, normalized);
     return layers;
   }
 

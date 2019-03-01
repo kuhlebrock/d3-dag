@@ -14,6 +14,8 @@ export default function() {
   let decross = twoLayer();
   let coord = greedy();
   let separation = defaultSeparation;
+  let layerSeparation = 1;
+  let normalize = true;
 
   // Takes a dag where nodes have a layer attribute, and adds dummy nodes so each
   // layer is adjacent, and returns an array of each layer of nodes.
@@ -75,9 +77,12 @@ export default function() {
       const [layer] = layers;
       layer.forEach((n) => (n.y = height / 2));
     } else {
-      layers.forEach((layer, i) =>
-        layer.forEach((n) => (n.y = (height * i) / (layers.length - 1))),
-      );
+      layers.forEach((layer, i) => {
+        var layerY = normalize ? 
+          (height * i) / (layers.length - 1)
+          : i * layerSeparation;
+        layer.forEach((n) => (n.y = layerY));
+      });
     }
     if (layers.every((l) => l.length === 1)) {
       // Next steps aren't necessary
@@ -87,7 +92,7 @@ export default function() {
       // Minimize edge crossings
       decross(layers);
       // Assign coordinates
-      coord(layers, separation);
+      coord(layers, separation, normalize);
       // Scale x
       layers.forEach((layer) => layer.forEach((n) => (n.x *= width)));
     }
@@ -120,6 +125,14 @@ export default function() {
 
   sugiyama.separation = function(x) {
     return arguments.length ? ((separation = x), sugiyama) : separation;
+  };
+
+  sugiyama.layerSeparation = function(x) {
+    return arguments.length ? ((layerSeparation = x), sugiyama) : separation;
+  };
+
+  sugiyama.normalize = function(x) {
+    return arguments.length ? ((normalize = x), sugiyama) : normalize;
   };
 
   return sugiyama;
