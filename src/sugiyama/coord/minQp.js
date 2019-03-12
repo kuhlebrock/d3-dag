@@ -25,7 +25,7 @@ export function sep(layers, inds, separation) {
       cons[sind] = -1;
       A.push(cons);
       b.push(-separation(first, second));
-    }),
+    })
   );
 
   return [A, b];

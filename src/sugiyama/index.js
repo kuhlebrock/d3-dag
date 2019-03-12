@@ -32,7 +32,7 @@ export default function() {
               `${node.id}${debug ? "->" : "\0"}${child.id}${
                 debug ? " (" : "\0"
               }${l}${debug ? ")" : ""}`,
-              undefined,
+              undefined
             );
             dummy.children = [last];
             (layers[l] || (layers[l] = [])).push(dummy);

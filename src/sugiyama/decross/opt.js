@@ -22,7 +22,7 @@ export default function() {
         model.ints[pair] = 1;
         model.constraints[pair] = { max: 1 };
         model.variables[pair] = { [pair]: 1 };
-      }),
+      })
     );
 
     layer.slice(0, layer.length - 1).forEach((n1, i) =>
@@ -45,7 +45,7 @@ export default function() {
           model.variables[pair2][triangleDown] = -1;
           model.variables[pair3][triangleDown] = 1;
         });
-      }),
+      })
     );
   }
 
@@ -79,9 +79,9 @@ export default function() {
               model.constraints[slackDown] = { min: -flip };
               model.variables[pairp][slackDown] = -1;
               model.variables[pairc][slackDown] = -sign;
-            }),
+            })
         );
-      }),
+      })
     );
   }
 
@@ -107,8 +107,8 @@ export default function() {
     // Sort layers
     layers.forEach((layer) =>
       layer.sort(
-        (n1, n2) => (n1.id > n2.id || -1) * (ordering[key(n1, n2)] || -1),
-      ),
+        (n1, n2) => (n1.id > n2.id || -1) * (ordering[key(n1, n2)] || -1)
+      )
     );
 
     return layers;

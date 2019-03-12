@@ -9,8 +9,8 @@ export default function(func) {
           target: c,
           data: this._childLinkData[j],
         },
-        i++,
-      ),
+        i++
+      )
     );
   }
   return this;

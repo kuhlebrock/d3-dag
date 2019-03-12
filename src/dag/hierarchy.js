@@ -31,7 +31,7 @@ export default function() {
     while ((node = queue.pop())) {
       node.children = (children(node.data) || []).map(nodify);
       node._childLinkData = node.children.map((c) =>
-        linkData(node.data, c.data),
+        linkData(node.data, c.data)
       );
     }
 
